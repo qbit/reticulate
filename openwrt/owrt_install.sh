@@ -123,3 +123,8 @@ if ! grep -q 'RNS 29716' /etc/config/firewall; then
     fi
 fi
 
+echo "==> Enabling RNS"
+/etc/init.d/rns enabled || /etc/init.d/rns enable
+
+echo "==> Starting RNS"
+/etc/init.d/rns running || /etc/init.d/rns start
