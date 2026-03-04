@@ -1,10 +1,15 @@
 #!/bin/sh
 
+# This script installs reticulum on a stock openwrt install on a Google Wifi device.
+
 set -e
 
 echo "==> Installing dependencies"
 opkg update
 opkg install python3 python3-pip python3-cryptography python3-pyserial shadow-su shadow-useradd shadow-groupadd
+
+# allow meshing
+opkg install wpad-mesh-mbedtls --download-only && opkg remove wpad-basic-mbedtls && opkg install wpad-mesh-mbedtls --cache . && rm *.ipk
 
 echo "==> Installing Reticulum Network Stack"
 pip install --upgrade rns lxmf rnsh
